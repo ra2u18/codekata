@@ -3,13 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { ModalProvider } from "@/components/providers/modal-provider";
-import { cn } from "@/lib/utils";
+import { ToastProvider } from "@/components/providers/toast-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "CodeKata",
-  description: "A task to showcase my react skills",
+  description: "A tech task",
 };
 
 export default function RootLayout({
@@ -22,6 +22,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ModalProvider />
+        <ToastProvider />
         {children}
       </body>
     </html>

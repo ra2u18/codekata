@@ -1,3 +1,5 @@
+'use client';
+
 import { useFormStatus } from "react-dom";
 
 import { Button } from "@/components/ui/button";
@@ -29,7 +31,6 @@ export const FormSubmit = ({
     <Button
       disabled={pending || disabled}
       type="submit"
-      variant={variant}
       size="sm"
       className={cn(className)}
     >

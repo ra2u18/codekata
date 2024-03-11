@@ -1,30 +1,47 @@
+import { PREDEFINED_TOPICS } from "@/types/constants";
+import { Topic, User } from "@/types/custom";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Topic = "Travel" | "Cars" | "Wildlife" | "Technology" | "Other";
-
-type User = {
+type State = {
   name: string;
   surname: string;
   topic: Topic | string;
   imageUrl: string | null;
 };
 
-type State = {
-  user: User | null;
-};
-
 type Actions = {
-  setUserData: (data: User) => void;
   clearUserData: () => void;
+  setName: (name: string) => void;
+  setSurname: (surname: string) => void;
+  setTopic: (topic: Topic | string) => void;
+  setImageUrl: (imageUrl: string) => void;
+  setData: (data: Partial<User>) => void;
 };
 
-export const useModalStore = create(
+export const useUserStore = create(
   persist<State & Actions>(
     (set) => ({
-      user: null,
-      setUserData: (data: User) => set(() => ({ user: data })),
-      clearUserData: () => set(() => ({ user: null })),
+      name: "",
+      surname: "",
+      topic: "",
+      imageUrl: null,
+
+      setName: (name: string) => set(() => ({ name })),
+      setSurname: (surname: string) => set(() => ({ surname })),
+      setImageUrl: (imageUrl: string) => set(() => ({ imageUrl })),
+      setTopic: (topic: Topic | string) => set(() => ({ topic })),
+      setData: (data: Partial<User>) => set(() => { 
+        console.log(data);
+        return { ...data };
+      }),
+      clearUserData: () =>
+        set(() => ({
+          name: "",
+          surname: "",
+          topic: "",
+          imageUrl: null,
+        })),
     }),
     {
       name: "user-data",

@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type Topic = "Travel" | "Cars" | "Wildlife" | "Technology" | "Other";
 
@@ -17,8 +18,15 @@ type Actions = {
   clearUserData: () => void;
 };
 
-export const useUserStore = create<State & Actions>((set) => ({
-  user: null,
-  setUserData: (data: User) => set(() => ({ user: data })),
-  clearUserData: () => set(() => ({ user: null })),
-}));
+export const useModalStore = create(
+  persist<State & Actions>(
+    (set) => ({
+      user: null,
+      setUserData: (data: User) => set(() => ({ user: data })),
+      clearUserData: () => set(() => ({ user: null })),
+    }),
+    {
+      name: "user-data",
+    }
+  )
+);

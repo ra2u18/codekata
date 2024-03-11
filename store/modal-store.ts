@@ -1,14 +1,22 @@
-import { create } from 'zustand';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 type State = {
   showModal: boolean;
-}
+};
 
 type Actions = {
-  setShowModal: (show: boolean) => void;
-}
+  toggleModal: () => void;
+};
 
-export const useModalStore = create<State & Actions>((set) => ({
-  showModal: true,
-  setShowModal: (show: boolean) => set(() => ({ showModal: show }))
-}));
+export const useModalStore = create(
+  persist<State & Actions>(
+    (set, get) => ({
+      showModal: true,
+      toggleModal: () => set(() => ({ showModal: !get().showModal })),
+    }),
+    {
+      name: "modal-visibility",
+    }
+  )
+);

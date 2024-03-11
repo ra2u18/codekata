@@ -7,6 +7,7 @@ type User = {
   name: string;
   surname: string;
   topic: Topic | string;
+  imageUrl: string | null;
 };
 
 type State = {

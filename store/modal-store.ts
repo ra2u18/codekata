@@ -2,18 +2,20 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type State = {
-  showModal: boolean;
+  isOpen: boolean;
 };
 
 type Actions = {
-  toggleModal: () => void;
+  onOpen: () => void;
+  onClose: () => void;
 };
 
 export const useModalStore = create(
   persist<State & Actions>(
-    (set, get) => ({
-      showModal: true,
-      toggleModal: () => set(() => ({ showModal: !get().showModal })),
+    (set) => ({
+      isOpen: true,
+      onClose: () => set(() => ({ isOpen: false })),
+      onOpen: () => set(() => ({ isOpen: true })),
     }),
     {
       name: "modal-visibility",

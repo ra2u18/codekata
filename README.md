@@ -12,7 +12,7 @@ Simplified application to create a user preference card. This uses local storage
 1) Sign up for unsplash api key on https://unsplash.com/developers
 2) Clone the repository:
 `git clone <repo_name> && cd ./<repo_name> && npm install`, this will install all dependencies
-3) Create .env file:
+3) Create .env file (assuming you are on the root project folder):
 `touch .env && echo 'NEXT_PUBLIC_UNSPLASH_ACCESS_KEY=<access_key>' > .env`
 
 ## Features
